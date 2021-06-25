@@ -119,14 +119,18 @@ namespace Vidshot
         private void ToolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             string itemName = e.ClickedItem.Name;
-            int c = window.Top;
+            bool chkFullScreen = window.Top == 0 ? true : false;
+            if (chkFullScreen)
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
             switch (itemName)
             {    
                 case "btnRecord":
                     VideoCapture1.Screen_Capture_Source = new VisioForge.Types.Sources.ScreenCaptureSourceSettings()
                     {
 
-                        FullScreen = window.Top == 0 ? true : false,
+                        FullScreen = chkFullScreen,
                         Top = window.Top,
                         Bottom = window.Bottom,
                         Right = window.Right,
